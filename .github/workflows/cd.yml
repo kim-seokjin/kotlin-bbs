@@ -32,7 +32,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "kotlin-bbs.tar.gz"
-          target: "/home/${{ secretes.EC2_USER }}/"
+          target: "/home/${{ secrets.EC2_USER }}/"
 
       - name: Restart docker container
         uses: appleboy/ssh-action@latest
