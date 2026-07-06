@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class BoardApplication
 
 fun main(args: Array<String>) {
-	runApplication<BoardApplication>(*args)
+    runApplication<BoardApplication>(*args)
 }
