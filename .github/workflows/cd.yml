@@ -26,7 +26,7 @@ jobs:
           docker save kotlin-bbs:latest | gzip > kotlin-bbs.tar.gz
 
       - name: Upload Docker image to EC2
-        uses: appleboy/scp-action@latest
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
@@ -35,7 +35,7 @@ jobs:
           target: "/home/${{ secrets.EC2_USER }}/"
 
       - name: Restart docker container
-        uses: appleboy/ssh-action@latest
+        uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
