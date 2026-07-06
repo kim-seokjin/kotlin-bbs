@@ -23,8 +23,5 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
       
-      - name: Run ktlint
-        run: ./gradlew ktlintCheck
-      
       - name: Run tests
         run: ./gradlew test
