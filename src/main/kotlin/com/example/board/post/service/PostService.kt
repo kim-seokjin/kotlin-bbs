@@ -17,20 +17,26 @@ class PostService(
         val post = Post.create(request.title, request.content, request.authorName)
         return postRepository.save(post)
     }
-    
+
     @Transactional
-    fun update(postId: Long, request: PostUpdateRequest): Post {
+    fun update(
+        postId: Long,
+        request: PostUpdateRequest,
+    ): Post {
         val post = findActivePost(postId)
         post.update(request.title, request.content, request.requesterName)
         return post
     }
-    
+
     @Transactional
-    fun delete(postId: Long, requesterName: String) {
+    fun delete(
+        postId: Long,
+        requesterName: String,
+    ) {
         val post = findActivePost(postId)
         post.delete(requesterName)
     }
-    
+
     private fun findActivePost(postId: Long): Post {
         val post = postRepository.findById(postId).orElseThrow { PostNotFoundException(postId) }
         if (post.isDeleted) {
