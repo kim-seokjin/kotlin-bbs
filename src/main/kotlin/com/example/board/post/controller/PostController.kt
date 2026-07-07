@@ -1,6 +1,7 @@
 package com.example.board.post.controller
 
 import com.example.board.post.domain.PostQueryRepository
+import com.example.board.post.domain.PostRepository
 import com.example.board.post.dto.PostCreateRequest
 import com.example.board.post.dto.PostResponse
 import com.example.board.post.dto.PostSummaryResponse
@@ -29,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/posts")
 class PostController(
     private val postService: PostService,
-    private val postQueryRepository: PostQueryRepository,
+    private val postRepository: PostRepository,
 ) {
     @Operation(summary = "게시글 생성")
     @PostMapping
@@ -74,6 +75,6 @@ class PostController(
     fun getPosts(
         @PageableDefault(size = 20) pageable: Pageable,
     ): ResponseEntity<Page<PostSummaryResponse>> {
-        return ResponseEntity.ok(postQueryRepository.findPostSummaries(pageable))
+        return ResponseEntity.ok(postRepository.findPostSummaries(pageable))
     }
 }
