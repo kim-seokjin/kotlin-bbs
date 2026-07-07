@@ -5,8 +5,8 @@ import com.example.board.post.domain.PostRepository
 import com.example.board.post.dto.PostCreateRequest
 import com.example.board.post.dto.PostUpdateRequest
 import com.example.board.post.exception.PostNotFoundException
-import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class PostService(
@@ -17,6 +17,9 @@ class PostService(
         val post = Post.create(request.title, request.content, request.authorName)
         return postRepository.save(post)
     }
+
+    @Transactional(readOnly = true)
+    fun getPost(postId: Long): Post = findActivePost(postId)
 
     @Transactional
     fun update(
