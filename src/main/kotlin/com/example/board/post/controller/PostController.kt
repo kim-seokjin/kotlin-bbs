@@ -1,6 +1,5 @@
 package com.example.board.post.controller
 
-import com.example.board.post.domain.PostQueryRepository
 import com.example.board.post.domain.PostRepository
 import com.example.board.post.dto.PostCreateRequest
 import com.example.board.post.dto.PostResponse
