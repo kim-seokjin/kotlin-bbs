@@ -2,6 +2,7 @@ package com.example.board.common.exception
 
 import com.example.board.comment.exception.CommentNotFoundException
 import com.example.board.post.exception.PostNotFoundException
+import com.example.board.tag.exception.TagNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -28,6 +29,11 @@ class GlobalExceptionHandler {
 
     @ExceptionHandler(CommentNotFoundException::class)
     fun handleCommentNotFound(ex: CommentNotFoundException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse(ex.message ?: "찾을 수 없습니다."))
+    }
+
+    @ExceptionHandler(TagNotFoundException::class)
+    fun handleTagNotFound(ex: TagNotFoundException): ResponseEntity<ErrorResponse> {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse(ex.message ?: "찾을 수 없습니다."))
     }
 }
