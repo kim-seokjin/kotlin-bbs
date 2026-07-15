@@ -1,6 +1,8 @@
 package com.example.board.common.exception
 
 import com.example.board.comment.exception.CommentNotFoundException
+import com.example.board.like.exception.DuplicateLikeException
+import com.example.board.like.exception.LikeNotFoundException
 import com.example.board.post.exception.PostNotFoundException
 import com.example.board.tag.exception.TagNotFoundException
 import org.springframework.http.HttpStatus
@@ -34,6 +36,16 @@ class GlobalExceptionHandler {
 
     @ExceptionHandler(TagNotFoundException::class)
     fun handleTagNotFound(ex: TagNotFoundException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse(ex.message ?: "찾을 수 없습니다."))
+    }
+
+    @ExceptionHandler(DuplicateLikeException::class)
+    fun handleDuplicateLike(ex: DuplicateLikeException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponse(ex.message ?: "이미 처리된 요청입니다."))
+    }
+
+    @ExceptionHandler(LikeNotFoundException::class)
+    fun handleLikeNotFound(ex: LikeNotFoundException): ResponseEntity<ErrorResponse> {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse(ex.message ?: "찾을 수 없습니다."))
     }
 }
